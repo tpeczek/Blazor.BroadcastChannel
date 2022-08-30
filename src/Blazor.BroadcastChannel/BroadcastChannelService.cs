@@ -8,7 +8,7 @@ namespace Blazor.BroadcastChannel
 
         public BroadcastChannelService(IJSRuntime jsRuntime)
         {
-            _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/Blazor.BroadcastChannel/Blazor.BroadcastChannel.js"));
+            _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Blazor.BroadcastChannel/Blazor.BroadcastChannel.js"));
         }
 
         public async Task<IBroadcastChannel> CreateOrJoinAsync(string channelName)
@@ -16,7 +16,7 @@ namespace Blazor.BroadcastChannel
             IJSObjectReference module = await _moduleTask.Value;
 
             BroadcastChannel channel = await module.InvokeAsync<BroadcastChannel>("createOrJoin", Guid.NewGuid().ToString(), channelName);
-            channel.SetSerive(this);
+            await channel.InitializeAsync(this);
 
             return channel;
         }
@@ -25,7 +25,21 @@ namespace Blazor.BroadcastChannel
         {
             IJSObjectReference module = await _moduleTask.Value;
 
-            await module.InvokeAsync<BroadcastChannel>("close", connectionId);
+            await module.InvokeVoidAsync("close", connectionId);
+        }
+
+        public async Task PostMessageAsync<TValue>(string connectionId, TValue data)
+        {
+            IJSObjectReference module = await _moduleTask.Value;
+
+            await module.InvokeVoidAsync("postMessage", connectionId, data);
+        }
+
+        public async Task AddMessageEventListener(BroadcastChannel channel)
+        {
+            IJSObjectReference module = await _moduleTask.Value;
+
+            await module.InvokeVoidAsync("addMessageEventListener", channel.Id, DotNetObjectReference.Create(channel));
         }
     }
 }

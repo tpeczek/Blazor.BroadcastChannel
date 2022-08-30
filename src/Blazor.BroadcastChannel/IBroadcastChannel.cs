@@ -8,12 +8,26 @@
         /// <summary>
         /// The name of the channel.
         /// </summary>
-        public string Name { get; }
+        string Name { get; }
+
+        /// <summary>
+        /// Occurs when a message arrives on the underlying channel.
+        /// </summary>
+        event EventHandler<BroadcastChannelMessageEventArgs>? Message;
 
         /// <summary>
         /// Terminates the connection to the underlying channel.
         /// </summary>
         /// <returns>The task object representing the asynchronous operation.</returns>
         Task CloseAsync();
+
+        /// <summary>
+        /// Sends a message to the underlying channel.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the data to be sent to the underlying channel</typeparam>
+        /// <param name="data">The data to be sent to the underlying channel.</param>
+        /// <param name="options">The options to control the data serialization behavior.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        Task PostMessageAsync<TValue>(TValue data);
     }
 }
