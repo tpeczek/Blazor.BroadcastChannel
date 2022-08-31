@@ -1,6 +1,6 @@
 # Blazor.BroadcastChannel
 
-This package wraps [Broadcast Channel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API).
+This is a HTML5 [Broadcast Channel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API) implementation for Blazor.
 
 The Broadcast Channel API allows sending messages to other browsing contexts on the same origin. It can be thought of as a simple message bus that allows pub/sub semantics between windows/tabs, iframes, web workers, and service workers.
 
