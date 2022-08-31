@@ -1,4 +1,5 @@
 # Blazor.BroadcastChannel
+[![NuGet Version](https://img.shields.io/nuget/v/Blazor.BroadcastChannel?label=Blazor.BroadcastChannel&logo=nuget)](https://www.nuget.org/packages/Blazor.BroadcastChannel/)
 
 This is a HTML5 [Broadcast Channel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API) implementation for Blazor.
 
