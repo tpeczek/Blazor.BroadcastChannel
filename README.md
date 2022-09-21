@@ -73,6 +73,10 @@ await broadcastChannel.DisposeAsync();
 
 It is important to disconnect from the channel to allow the underlying JavaScript object to be garbage collected.
 
+## Demos
+
+You can see Blazor.BroadcastChannel in action as part of [Demo.AspNetCore.MicroFrontendsInAction](https://github.com/tpeczek/Demo.AspNetCore.MicroFrontendsInAction/tree/main/12-child-child-communication-with-blazor-webassembly-based-web-components).
+
 ## Donating
 
 My blog and open source projects are result of my passion for software development, but they require a fair amount of my personal time. If you got value from any of the content I create, then I would appreciate your support by [sponsoring me](https://github.com/sponsors/tpeczek) (either monthly or one-time).
