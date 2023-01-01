@@ -26,7 +26,6 @@
         /// </summary>
         /// <typeparam name="TValue">The type of the data to be sent to the underlying channel</typeparam>
         /// <param name="data">The data to be sent to the underlying channel.</param>
-        /// <param name="options">The options to control the data serialization behavior.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         Task PostMessageAsync<TValue>(TValue data);
     }
