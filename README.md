@@ -11,7 +11,7 @@ The Broadcast Channel API allows sending messages to other browsing contexts on 
 
 1. Install the NuGet package `Blazor.BroadcastChannel`.
     ```
-    dotnet add Blazor.BroadcastChannel 
+    dotnet add package Blazor.BroadcastChannel 
     ```
 2. In `Program.cs` add `builder.Services.AddBroadcastChannel`.
     ```
