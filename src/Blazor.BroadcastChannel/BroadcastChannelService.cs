@@ -1,4 +1,5 @@
-﻿using Microsoft.JSInterop;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace Blazor.BroadcastChannel
 {
@@ -6,9 +7,13 @@ namespace Blazor.BroadcastChannel
     {
         private readonly Lazy<ValueTask<IJSObjectReference>> _moduleTask;
 
-        public BroadcastChannelService(IJSRuntime jsRuntime)
+        public BroadcastChannelService(IJSRuntime jsRuntime, NavigationManager NavManager)
         {
-            _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Blazor.BroadcastChannel/Blazor.BroadcastChannel.js"));
+
+            string path = new Uri(NavManager.BaseUri).AbsolutePath + "_content/Blazor.BroadcastChannel/Blazor.BroadcastChannel.js";
+
+            //_moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Blazor.BroadcastChannel/Blazor.BroadcastChannel.js"));
+            _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", path));
         }
 
         public async Task<IBroadcastChannel> CreateOrJoinAsync(string channelName)
