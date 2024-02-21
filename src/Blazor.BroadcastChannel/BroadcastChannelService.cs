@@ -7,12 +7,10 @@ namespace Blazor.BroadcastChannel
     {
         private readonly Lazy<ValueTask<IJSObjectReference>> _moduleTask;
 
-        public BroadcastChannelService(IJSRuntime jsRuntime, NavigationManager NavManager)
-        {
+        public BroadcastChannelService(IJSRuntime jsRuntime)
+        {            
+            string path = "./_content/Blazor.BroadcastChannel/Blazor.BroadcastChannel.js";
 
-            string path = new Uri(NavManager.BaseUri).AbsolutePath + "_content/Blazor.BroadcastChannel/Blazor.BroadcastChannel.js";
-
-            //_moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/Blazor.BroadcastChannel/Blazor.BroadcastChannel.js"));
             _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", path));
         }
 
