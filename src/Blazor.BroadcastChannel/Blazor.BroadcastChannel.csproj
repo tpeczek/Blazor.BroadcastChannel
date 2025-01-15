@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
     <Description>Blazor.BroadcastChannel is a HTML5 Broadcast Channel API implementation for Blazor.</Description>
-    <Copyright>Copyright © 2022 - 2024 Tomasz Pęczek</Copyright>
+    <Copyright>Copyright © 2022 - 2025 Tomasz Pęczek</Copyright>
     <VersionPrefix>1.0.0</VersionPrefix>
     <Authors>Tomasz Pęczek</Authors>
     <TargetFramework>net6.0</TargetFramework>
