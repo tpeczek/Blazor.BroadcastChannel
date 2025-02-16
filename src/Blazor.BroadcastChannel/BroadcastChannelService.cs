@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 
 namespace Blazor.BroadcastChannel
 {
-    internal class BroadcastChannelService : IBroadcastChannelService
+    internal class BroadcastChannelService : IBroadcastChannelService, IAsyncDisposable
     {
         private readonly Lazy<ValueTask<IJSObjectReference>> _moduleTask;
 
         public BroadcastChannelService(IJSRuntime jsRuntime)
-        {            
-            string path = "./_content/Blazor.BroadcastChannel/Blazor.BroadcastChannel.js";
+        {
+            const string path = "./_content/Blazor.BroadcastChannel/Blazor.BroadcastChannel.js";
 
             _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", path));
         }
@@ -43,6 +42,15 @@ namespace Blazor.BroadcastChannel
             IJSObjectReference module = await _moduleTask.Value;
 
             await module.InvokeVoidAsync("addMessageEventListener", channel.Id, DotNetObjectReference.Create(channel));
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            if (_moduleTask.IsValueCreated)
+            {
+                IJSObjectReference module = await _moduleTask.Value;
+                await module.DisposeAsync();
+            }
         }
     }
 }
