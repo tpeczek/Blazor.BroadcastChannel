@@ -8,7 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class BroadcastChannelServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers a default service which provides support for Broadcast Channel API.
+        /// Registers a default transient service which provides support for Broadcast Channel API.
         /// </summary>
         /// <param name="services">The collection of service descriptors.</param>
         /// <returns>The collection of service descriptors.</returns>
@@ -21,6 +21,24 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddOptions();
             services.AddTransient<IBroadcastChannelService, BroadcastChannelService>();
+
+            return services;
+        }
+        
+        /// <summary>
+        /// Registers a default singleton service which provides support for Broadcast Channel API.
+        /// </summary>
+        /// <param name="services">The collection of service descriptors.</param>
+        /// <returns>The collection of service descriptors.</returns>
+        public static IServiceCollection AddBroadcastChannelAsSingleton(this IServiceCollection services)
+        {
+            if (services is null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
+            services.AddOptions();
+            services.AddSingleton<IBroadcastChannelService, BroadcastChannelService>();
 
             return services;
         }

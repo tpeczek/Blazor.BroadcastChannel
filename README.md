@@ -13,7 +13,9 @@ The Broadcast Channel API allows sending messages to other browsing contexts on 
     ```
     dotnet add package Blazor.BroadcastChannel 
     ```
-2. In `Program.cs` add `builder.Services.AddBroadcastChannel`.
+2. In `Program.cs` register the `BroadcastChannelService` service.
+
+   Either as a transient service.
     ```
     ...
 
@@ -22,11 +24,27 @@ The Broadcast Channel API allows sending messages to other browsing contexts on 
     ...
 
     builder.Services.AddBroadcastChannel();
-
+   
     ...
 
     await builder.Build().RunAsync();
     ```
+   
+   Or as a singleton service (preferred for WASM projects).
+    ```
+    ...
+
+    var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+    ...
+
+    bulder.Services.AddBroadcastChannelAsSingleton();
+   
+    ...
+
+    await builder.Build().RunAsync();
+    ```
+
 3. Add the `Blazor.BroadcastChannel` namespace in `_Imports.razor` or the component in which you want to use the Broadcast Channel API.
     ```
     @using Blazor.BroadcastChannel
