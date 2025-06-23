@@ -46,10 +46,17 @@ namespace Blazor.BroadcastChannel
 
         public async ValueTask DisposeAsync()
         {
-            if (_moduleTask.IsValueCreated)
+            try
             {
-                IJSObjectReference module = await _moduleTask.Value;
-                await module.DisposeAsync();
+                if (_moduleTask.IsValueCreated)
+                {
+                    IJSObjectReference module = await _moduleTask.Value;
+                    await module.DisposeAsync();
+                }
+            }
+            catch (JSDisconnectedException)
+            {
+                // When disposing the module, the JS runtime may be disconnected.
             }
         }
     }
